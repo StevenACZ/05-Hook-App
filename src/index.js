@@ -5,9 +5,10 @@ import ReactDOM from 'react-dom';
 // import CounterWithCustomHook from './components/01-useState/CounterWithCustomHook';
 // import HookApp from './HookApp';
 // import SimpleForm from './components/02-useEffect/SimpleForm';
-import MultipleCustomHooks from './components/03-examples/MultipleCustomHooks';
+// import MultipleCustomHooks from './components/03-examples/MultipleCustomHooks';
+import FocusScreen from './components/04-useRef/FocusScreen';
 
 ReactDOM.render(
-  <MultipleCustomHooks />,
+  <FocusScreen/>,
   document.getElementById('root')
 );
