@@ -22,7 +22,19 @@ const CounterApp = () => {
             ...state,
             counter1: counter1 + 1
           });
-        } }
+        }}
+      >
+        +1
+      </button>
+
+      <button
+        className="btn btn-primary"
+        onClick={ () => {
+          setState({
+            ...state,
+            counter2: counter2 + 1,
+          })
+        }}
       >
         +1
       </button>
