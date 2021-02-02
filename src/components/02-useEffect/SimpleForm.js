@@ -27,8 +27,8 @@ const SimpleForm = () => {
     setFormState({
       ...formState,
       [ target.name ]: target.value
-    })
-  }
+    });
+  };
 
   return (
     <div>
