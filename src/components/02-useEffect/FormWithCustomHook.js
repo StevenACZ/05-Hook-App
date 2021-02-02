@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm';
 import './effects.css'
 
@@ -59,13 +59,12 @@ const FormWithCustomHooks = () => {
           name="password"
           className="form-control"
           placeholder="****"
-          autoComplete="off"
           value={ password }
           onChange={ handleInputChange }
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">Guardar</button>
+      <button type="submit" className="btn btn-primary mt-4">Guardar</button>
 
     </form>
   )
