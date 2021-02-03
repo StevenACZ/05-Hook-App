@@ -1,6 +1,7 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import useForm from '../../hooks/useForm';
 import './styles.css';
+import TodoList from './TodoList';
 import { todoReducer } from './todoReducer';
 
 const init = () => {
@@ -8,8 +9,8 @@ const init = () => {
 }
 
 const TodoApp = () => {
-  const [ todos, dispatch ] = useReducer(todoReducer, [], init);
 
+  const [ todos, dispatch ] = useReducer(todoReducer, [], init);
   const [ { description }, handleInputChange, reset ] = useForm({
     description: ''
   });
@@ -18,16 +19,14 @@ const TodoApp = () => {
     localStorage.setItem('todos', JSON.stringify( todos ));
   }, [ todos ])
 
-  const handleDelete = ( { id } ) => {
-    const action = {
-      type: 'delete',
+  const handleToggle = ( { id } ) => {
+    dispatch({
+      type: 'toggle',
       payload: id
-    }
-    
-    dispatch( action );
+    })
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = ( e ) => {
     e.preventDefault();
 
     if ( description.trim().length <= 1 ) {
@@ -54,6 +53,15 @@ const TodoApp = () => {
     reset()
   };
 
+  const handleDelete = ( { id } ) => {
+    const action = {
+      type: 'delete',
+      payload: id
+    }
+    
+    dispatch( action );
+  };
+
   return (
     <div>
       <h1>TodoApp ({ todos.length }) </h1>
@@ -61,14 +69,17 @@ const TodoApp = () => {
 
       <div className="row">
         <div className="col-7">
-          <ul>
+          {/* <ul>
             {
               todos.map( (todo, i) => (
                 <li
                   key={ todo.id }
                   className="list-group-item"
                 >
-                  <p className="text-center"> { i } - { todo.desc } </p>
+                  <p
+                    className={ `${ todo.done && 'complete' }` }
+                    onClick={ () => handleToggle(todo) }
+                  > { i } - { todo.desc } </p>
                   <button
                     className="btn btn-danger"
                     onClick={ () => handleDelete(todo) }
@@ -78,7 +89,13 @@ const TodoApp = () => {
                 </li>
               ))
             }
-          </ul>
+          </ul> */}
+
+          <TodoList
+            todos={ todos }
+            handleToggle={ handleToggle }
+            handleDelete={ handleDelete }
+          />
         </div>
 
         <div className="col-5">
