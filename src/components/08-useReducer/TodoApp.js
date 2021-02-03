@@ -1,17 +1,49 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import useForm from '../../hooks/useForm';
 import './styles.css';
 import { todoReducer } from './todoReducer';
 
-const initialState = [{
-  id: new Date().getTime(),
-  desc: 'Aprender React',
-  done: false,
-}];
+const init = () => {
+  return JSON.parse(localStorage.getItem('todos')) || [];
+}
+
 const TodoApp = () => {
+  const [ todos, dispatch ] = useReducer(todoReducer, [], init);
 
-  const [ todos ] = useReducer(todoReducer, initialState)
+  const [ { description }, handleInputChange, reset ] = useForm({
+    description: ''
+  });
 
-  console.log(todos);
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify( todos ));
+  }, [ todos ])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if ( description.trim().length <= 1 ) {
+      return;
+    }
+
+    // CREAR NUEVO TODO
+    const newTodo = {
+      id: new Date().getTime(),
+      desc: description,
+      done: false,
+    };
+
+    // DEFINIMOS LA ACCION
+    const action = {
+      type: 'add',
+      payload: newTodo
+    };
+
+    // ENVIAMOS LA ACCION CON LA DATA
+    dispatch( action );
+
+    // RESET DEL FORMULARIO
+    reset()
+  }
 
   return (
     <div>
@@ -43,17 +75,23 @@ const TodoApp = () => {
           <h4>Agregar TODO</h4>
           <hr />
 
-          <form>
+          <form
+            className="d-grid gap-2"
+            onSubmit={ handleSubmit }  
+          >
             <input
               type="text"
               name="description"
               className="form-control"
               placeholder="Aprender ..."
               autoComplete="off"
+              value={ description }
+              onChange={ handleInputChange }
             />
 
             <button
-              className="btn btn-outline-primary mt-2 btn-block"
+              type="submit"
+              className="btn btn-outline-primary"
             >
               Agregar
             </button>
