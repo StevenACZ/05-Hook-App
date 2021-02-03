@@ -18,6 +18,15 @@ const TodoApp = () => {
     localStorage.setItem('todos', JSON.stringify( todos ));
   }, [ todos ])
 
+  const handleDelete = ( { id } ) => {
+    const action = {
+      type: 'delete',
+      payload: id
+    }
+    
+    dispatch( action );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,7 +52,7 @@ const TodoApp = () => {
 
     // RESET DEL FORMULARIO
     reset()
-  }
+  };
 
   return (
     <div>
@@ -62,6 +71,7 @@ const TodoApp = () => {
                   <p className="text-center"> { i } - { todo.desc } </p>
                   <button
                     className="btn btn-danger"
+                    onClick={ () => handleDelete(todo) }
                   >
                     Borrar
                   </button>
