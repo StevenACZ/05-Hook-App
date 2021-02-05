@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prueba  debe de mostrarse correctamente 1`] = `
+<div>
+  <div>
+    <nav
+      className="navbar navbar-expand-sm navbar-dark bg-dark"
+    >
+      <div
+        className="container-fluid"
+      >
+        <a
+          className="navbar-brand"
+          href="/"
+          onClick={[Function]}
+        >
+          useContext
+        </a>
+        <div
+          className="navbar-nav"
+        >
+          <a
+            aria-current="page"
+            className="nav-link active"
+            href="/"
+            onClick={[Function]}
+            style={Object {}}
+          >
+            Home
+          </a>
+          <a
+            aria-current={null}
+            className="nav-link"
+            href="/login"
+            onClick={[Function]}
+          >
+            Login
+          </a>
+          <a
+            aria-current={null}
+            className="nav-link"
+            href="/about"
+            onClick={[Function]}
+          >
+            About
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div>
+      <h1>
+        HomeScreen
+      </h1>
+      <hr />
+      <pre>
+        {
+  "id": 1,
+  "name": "Fernando"
+}
+        ;
+      </pre>
+    </div>
+  </div>
+</div>
+`;
